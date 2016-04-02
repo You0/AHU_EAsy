@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/className1"
+        android:layout_marginTop="0dp"
+        android:gravity="center"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+/>
+    <TextView
+        android:id="@+id/classTeacher1"
+        android:gravity="center"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="50dp"/>
+    <TextView
+        android:id="@+id/classTime1"
+        android:gravity="center"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="100dp"/>
+    <TextView
+        android:id="@+id/classRoom1"
+        android:gravity="center"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="150dp"/>
+
+</RelativeLayout>

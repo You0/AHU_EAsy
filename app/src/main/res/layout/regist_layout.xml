@@ -1,0 +1,208 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    tools:context="krelve.app.Easy.activity.Register" >
+
+    <krelve.app.Easy.activity.CircleImg
+        android:id="@+id/avatarImg"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="60dp"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/default2" />
+
+    <EditText
+        android:id="@+id/nickname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/avatarImg"
+        android:layout_centerHorizontal="true"
+        android:hint="请输入您的昵称(不可更改)"
+        android:layout_marginTop="5dp"
+
+        android:textColor="#000000"
+        android:textSize="16sp" />
+
+
+    <LinearLayout
+        android:id="@+id/username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/nickname"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="35dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/login_user" />
+
+        <EditText
+            android:id="@+id/user_name"
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:padding="10dp"
+            android:hint="请输入用户名(用于登录)"
+            android:singleLine="true"
+            android:textColor="#000000"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/line0"
+        android:layout_width="240dp"
+        android:layout_height="1dp"
+        android:layout_below="@id/username"
+        android:layout_centerHorizontal="true"
+        android:background="#000000" />
+
+    <LinearLayout
+        android:id="@+id/accountLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/username"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/login_user" />
+
+        <EditText
+            android:id="@+id/email"
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:padding="10dp"
+            android:hint="请输入邮箱(用于找回密码)"
+            android:singleLine="true"
+            android:textColor="#000000"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/line1"
+        android:layout_width="240dp"
+        android:layout_height="1dp"
+        android:layout_below="@id/accountLayout"
+        android:layout_centerHorizontal="true"
+        android:background="#000000" />
+
+    <LinearLayout
+        android:id="@+id/pwdLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/line1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/login_pwd" />
+
+        <EditText
+            android:id="@+id/firstpassword"
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:inputType="textPassword"
+            android:padding="10dp"
+            android:singleLine="true"
+            android:hint="请输入密码"
+            android:textColor="#000000"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/comfirm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/pwdLayout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/login_pwd" />
+
+        <EditText
+            android:id="@+id/comfirmPassword"
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:inputType="textPassword"
+            android:padding="10dp"
+            android:singleLine="true"
+            android:hint="请重新输入一遍密码"
+            android:textColor="#000000"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+
+
+
+
+
+    <View
+        android:id="@+id/line2"
+        android:layout_width="240dp"
+        android:layout_height="1dp"
+        android:layout_below="@id/pwdLayout"
+        android:layout_centerHorizontal="true"
+        android:background="#000000" />
+
+
+    <View
+        android:id="@+id/line4"
+        android:layout_width="240dp"
+        android:layout_height="1dp"
+        android:layout_below="@id/comfirm"
+        android:layout_centerHorizontal="true"
+        android:background="#000000" />
+
+    <Button
+        android:id="@+id/registbtn"
+        android:layout_width="240dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/comfirm"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:background="#8280ff"
+        android:padding="10dp"
+        android:text="注册"
+        android:textColor="#ffffff"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+
+
+    <TextView
+        android:padding="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/registbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/alreadyAccout"
+        android:textSize="18sp"
+        android:textColor="#a4a4a4"
+        android:text="已经有账号了？请点我~"
+
+        />
+
+
+</RelativeLayout>

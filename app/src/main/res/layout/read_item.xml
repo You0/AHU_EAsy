@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    android:id="@+id/theLayoutTosetImage"
+    >
+
+    <LinearLayout
+        android:paddingTop="10dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <krelve.app.Easy.activity.CircleImg
+            android:id="@+id/foundheader"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/default1"/>
+
+        <TextView
+            android:id="@+id/foundusername"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Admin"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp"
+            android:textColor="#ff9a76"
+            android:layout_weight="1"/>
+
+
+
+
+        <TextView
+            android:id="@+id/founddate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2016/2/27/10:25"
+            android:textSize="13sp"
+            android:textColor="#999999"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="10dp"
+            android:layout_marginEnd="45dp" />
+
+    </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/addimage"
+            android:orientation="vertical"
+            android:paddingTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/foundcontent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="这是一段话，用来表示正文，"
+                android:textSize="18sp"
+                android:textColor="#999999"
+                />
+
+
+
+
+
+        </LinearLayout>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            ></View>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#cccccc"
+        ></View>
+
+
+
+</LinearLayout>

@@ -30,14 +30,14 @@ import krelve.app.Easy.R;
  * Created by H3c on 12/13/14.
  */
 public class ClipSquareImageView extends ImageView implements View.OnTouchListener, ViewTreeObserver.OnGlobalLayoutListener {
-    private final Paint mBorderPaint = new Paint(Paint.ANTI_ALIAS_FLAG);// 边框画笔
-    private int BORDER_DISTANCE;// 距离屏幕的边距
-    private int OUTSIDE_COLOR;// 外部背景颜色
-    private int BORDER_LINE_COLOR;// 边框颜色
-    private float BORDER_LINE_WIDTH;// 框框宽度
-    private int WIDTH_WEIGHT = 1;// 宽边比例
-    private int HEIGHT_WEIGHT = 1;// 高边比例
-    private int BORDER_LONG;// 边长
+    private final Paint mBorderPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    private int BORDER_DISTANCE;
+    private int OUTSIDE_COLOR;
+    private int BORDER_LINE_COLOR;
+    private float BORDER_LINE_WIDTH;
+    private int WIDTH_WEIGHT = 1;
+    private int HEIGHT_WEIGHT = 1;
+    private int BORDER_LONG;
 
     public static final float DEFAULT_MAX_SCALE = 4.0f;
     public static final float DEFAULT_MID_SCALE = 2.0f;
@@ -48,17 +48,17 @@ public class ClipSquareImageView extends ImageView implements View.OnTouchListen
     private float maxScale = DEFAULT_MAX_SCALE;
 
     private MultiGestureDetector multiGestureDetector;
-    private boolean isIniting;// 正在初始化
-    private Rect outsideRect = new Rect();// View的Rect
-    private Rect cutRect = new Rect();// 裁剪的Rect
+    private boolean isIniting;
+    private Rect outsideRect = new Rect();
+    private Rect cutRect = new Rect();
 
-    private Matrix defaultMatrix = new Matrix();// 初始化的图片矩阵，控制图片撑满屏幕及显示区域
-    private Matrix dragMatrix = new Matrix();// 拖拽放大过程中动态的矩阵
-    private Matrix finalMatrix = new Matrix();// 最终显示的矩阵
-    private final RectF displayRect = new RectF();// 图片的真实大小
+    private Matrix defaultMatrix = new Matrix();
+    private Matrix dragMatrix = new Matrix();
+    private Matrix finalMatrix = new Matrix();
+    private final RectF displayRect = new RectF();
     private final float[] matrixValues = new float[9];
 
-    private SHAPE mShape = SHAPE.REGTANGLE; // 遮罩样式
+    private SHAPE mShape = SHAPE.REGTANGLE;
     public enum SHAPE {
         ROUND,
         REGTANGLE
@@ -79,43 +79,27 @@ public class ClipSquareImageView extends ImageView implements View.OnTouchListen
         multiGestureDetector = new MultiGestureDetector(context);
     }
 
-    /**
-     * 边框距离屏幕宽度
-     * @param distance
-     */
+
     public void setBorderDistance(int distance) {
         this.BORDER_DISTANCE = distance;
     }
 
-    /**
-     * 边框宽度
-     * @param width
-     */
+
     public void setBorderWidth(int width) {
         this.BORDER_LINE_WIDTH = width;
     }
 
-    /**
-     * 边框颜色
-     * @param color
-     */
+
     public void setBorderColor(int color) {
         this.BORDER_LINE_COLOR = color;
     }
 
-    /**
-     * 非裁剪区域颜色
-     * @param color
-     */
+
     public void setOutsideColor(int color) {
         this.OUTSIDE_COLOR = color;
     }
 
-    /**
-     * 设置裁剪比例
-     * @param widthWeight
-     * @param heightWeight
-     */
+
     public void setBorderWeight(int widthWeight, int heightWeight) {
         this.WIDTH_WEIGHT = widthWeight;
         this.HEIGHT_WEIGHT = heightWeight;
@@ -124,9 +108,6 @@ public class ClipSquareImageView extends ImageView implements View.OnTouchListen
         invalidate();
     }
 
-    /**
-     * 设置是圆的还是方的
-     */
     public void setShape(SHAPE shape) {
         mShape = shape;
         invalidate();
@@ -150,20 +131,16 @@ public class ClipSquareImageView extends ImageView implements View.OnTouchListen
         if(isIniting) {
             return;
         }
-        // 调整视图位置
         initBmpPosition();
     }
 
     @Override
     public void setImageBitmap(Bitmap bm) {
         super.setImageBitmap(bm);
-        // 调整视图位置
         initBmpPosition();
     }
 
-    /**
-     * 初始化图片位置
-     */
+
     private void initBmpPosition() {
         isIniting = true;
         super.setScaleType(ScaleType.MATRIX);
@@ -177,7 +154,6 @@ public class ClipSquareImageView extends ImageView implements View.OnTouchListen
         outsideRect.set(0, 0, getWidth(), getHeight());
         BORDER_LONG = Math.min(outsideRect.width(), outsideRect.height()) - 2 * BORDER_DISTANCE;
 
-        // 裁剪后方向
         boolean isCutToHorizontal = false;
         if(WIDTH_WEIGHT >= HEIGHT_WEIGHT) {
             if(WIDTH_WEIGHT == HEIGHT_WEIGHT && (outsideRect.width() > outsideRect.height())) {
@@ -186,34 +162,34 @@ public class ClipSquareImageView extends ImageView implements View.OnTouchListen
             }
         }
 
-        // 裁剪区域
+
         int inLeft = BORDER_DISTANCE + (isCutToHorizontal ? 0 : (outsideRect.width() - outsideRect.height() * WIDTH_WEIGHT / HEIGHT_WEIGHT) / 2);
         int inTop = isCutToHorizontal ? (outsideRect.height() - BORDER_LONG * HEIGHT_WEIGHT / WIDTH_WEIGHT) >> 1 : BORDER_DISTANCE;
         int inRight = outsideRect.width() - inLeft;
         int inBottom = outsideRect.height() - inTop;
         cutRect.set(inLeft, inTop, inRight, inBottom);
 
-        // 获得图片高宽
+
         final float drawableWidth = drawable.getIntrinsicWidth();
         final float drawableHeight = drawable.getIntrinsicHeight();
 
-        // 按图片最小边比例缩放图片，用于撑满裁剪区
+
         float screenScale;
         float photoX = cutRect.left;
         float photoY = cutRect.top;
-        // 先统一比例
+
         float scaleWidthWeight = cutRect.width() / drawableWidth;
-        // 区域比图片宽，按照图片宽撑满
+
         if(drawableHeight * scaleWidthWeight > cutRect.height()) {
             screenScale = cutRect.width() / drawableWidth;
             photoY = photoY - ((drawableHeight * screenScale - cutRect.height()) / 2);
-        } else {// 图片比区域宽，按照图片高度撑满
+        } else {
             screenScale = cutRect.height() / drawableHeight;
             photoX = photoX - ((drawableWidth * screenScale - cutRect.width()) / 2);
         }
         defaultMatrix.setScale(screenScale, screenScale);
 
-        // 设置图片位置居中
+
         defaultMatrix.postTranslate(photoX, photoY);
 
         resetMatrix();
@@ -254,7 +230,7 @@ public class ClipSquareImageView extends ImageView implements View.OnTouchListen
 
         private float lastTouchX;
         private float lastTouchY;
-        private float lastPointerCount;// 上一次是几个手指事件
+        private float lastPointerCount;
 
         public MultiGestureDetector(Context context) {
             scaleGestureDetector = new ScaleGestureDetector(context, this);
@@ -383,7 +359,7 @@ public class ClipSquareImageView extends ImageView implements View.OnTouchListen
                     post(new AnimatedZoomRunnable(scale, midScale, x, y));
                 } else if ((scale >= midScale) && (scale < maxScale)) {
                     post(new AnimatedZoomRunnable(scale, maxScale, x, y));
-                } else {// 双击缩小小于最小值
+                } else {
                     post(new AnimatedZoomRunnable(scale, minScale, x, y));
                 }
             } catch (Exception e) {
@@ -473,7 +449,7 @@ public class ClipSquareImageView extends ImageView implements View.OnTouchListen
         }
 
         float deltaX = 0, deltaY = 0;
-        // 判断移动或缩放后，图片显示是否超出裁剪框边界
+
         if(rect.top > cutRect.top){
             deltaY = cutRect.top - rect.top;
         }
@@ -492,13 +468,7 @@ public class ClipSquareImageView extends ImageView implements View.OnTouchListen
 
     }
 
-    /**
-     * 获取图片相对Matrix的距离
-     *
-     * @param matrix
-     *            - Matrix to map Drawable against
-     * @return RectF - Displayed Rectangle
-     */
+
     private RectF getDisplayRect(Matrix matrix) {
         Drawable d = getDrawable();
         if (null != d) {
@@ -510,11 +480,7 @@ public class ClipSquareImageView extends ImageView implements View.OnTouchListen
         return null;
     }
 
-    /**
-     * 剪切图片，返回剪切后的bitmap对象
-     *
-     * @return
-     */
+
     public Bitmap clip(){
         Bitmap bitmap = Bitmap.createBitmap(getWidth(), getHeight(), Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bitmap);
@@ -529,9 +495,7 @@ public class ClipSquareImageView extends ImageView implements View.OnTouchListen
         drawBorder(canvas);
     }
 
-    /**
-     * 画边框
-     */
+
     private void drawBorder(Canvas canvas) {
         mBorderPaint.setColor(OUTSIDE_COLOR);
 
@@ -548,7 +512,6 @@ public class ClipSquareImageView extends ImageView implements View.OnTouchListen
                 canvas.drawRect(outsideRect.left, cutRect.top, cutRect.left, cutRect.bottom, mBorderPaint);
                 canvas.drawRect(cutRect.right, cutRect.top, outsideRect.right, cutRect.bottom, mBorderPaint);
 
-                // 画边框
                 mBorderPaint.setColor(BORDER_LINE_COLOR);
                 mBorderPaint.setStrokeWidth(BORDER_LINE_WIDTH);
                 canvas.drawLine(cutRect.left, cutRect.top, cutRect.left, cutRect.bottom, mBorderPaint);

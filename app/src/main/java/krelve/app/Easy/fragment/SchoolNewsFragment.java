@@ -19,6 +19,7 @@ import java.util.ArrayList;
 
 import krelve.app.Easy.Config;
 import krelve.app.Easy.R;
+import krelve.app.Easy.activity.MainActivity;
 import krelve.app.Easy.activity.SchoolInfo;
 import krelve.app.Easy.adapter.MyItemClickListener;
 import krelve.app.Easy.adapter.SchoolInforevAdapter;
@@ -57,6 +58,7 @@ public class SchoolNewsFragment extends BaseFragment implements MyItemClickListe
         schoolInfoBeans =new ArrayList<SchoolInfoBean>();
         mActivity.setTitle("资讯");
         GetSchoolInfo();
+        ((MainActivity) mActivity).setSwipeRefreshEnable(false);
 
         return view;
     }
@@ -103,5 +105,11 @@ public class SchoolNewsFragment extends BaseFragment implements MyItemClickListe
         startActivity(intent);
 
         //Toast.makeText(mActivity,url,Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+       // ((MainActivity) mActivity).setSwipeRefreshEnable(true);
     }
 }

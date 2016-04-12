@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void loadLatest() {
         SharedPreferences sharedPreferences = Kpplication.getContext().getSharedPreferences("last", Kpplication.getContext().MODE_PRIVATE);
-        String last = sharedPreferences.getString("last", "latest");
+        String last = sharedPreferences.getString("last", "found");
         if (last.equals("latest")) {
             getSupportFragmentManager().beginTransaction().
                     setCustomAnimations(R.anim.slide_in_from_right, R.anim.slide_out_to_left).

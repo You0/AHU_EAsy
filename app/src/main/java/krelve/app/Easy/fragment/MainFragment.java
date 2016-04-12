@@ -50,8 +50,8 @@ public class MainFragment extends BaseFragment {
 
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        SharedPreferences sharedPreferences = Kpplication.getContext().getSharedPreferences("last", Kpplication.getContext().MODE_PRIVATE);
-        sharedPreferences.edit().putString("last", "latest").commit();
+        //SharedPreferences sharedPreferences = Kpplication.getContext().getSharedPreferences("last", Kpplication.getContext().MODE_PRIVATE);
+        //sharedPreferences.edit().putString("last", "latest").commit();
         ((MainActivity) mActivity).setToolbarTitle("今日热闻");
         View view = inflater.inflate(R.layout.main_news_layout, container, false);
         lv_news = (ListView) view.findViewById(R.id.lv_news);
